@@ -169,7 +169,7 @@ const list = ref([
           </div>
         </div>
 
-        <div class="flex px-1 justify-end flex-col mt-6 px-2">
+        <div class="flex justify-end flex-col mt-6 px-2">
           <span class="text-gray-700 font-semibold text-md ml-auto pb-1">
             Total: {{ total }}
           </span>

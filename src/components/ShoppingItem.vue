@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps({
-  data: {
-    type: Object,
-    required: true,
-  },
-  index: {
-    type: Number,
-    required: true,
-  },
-});
+interface itemInterface {
+  name: string;
+  value: number;
+  amount: number;
+  completed: boolean;
+}
 
-const item = computed(() => props.data);
+const props = defineProps<{
+  index: number;
+  item: itemInterface | any;
+}>();
+
+const item = computed(() => props.item);
 const index = computed(() => props.index);
 </script>
 

@@ -7,6 +7,12 @@ defineProps({
   },
 });
 
+const item = {
+  name: String,
+  value: Number,
+  amount: Number,
+};
+
 const ctx = defineEmits(["delete", "toggleCompleted"]);
 
 const deleteItem = (index: number) => {
@@ -22,7 +28,7 @@ const toggleCompleted = (index: number, completed: boolean) => {
   <ul class="mb-8 space-y-2">
     <template v-for="(item, i) in items" :key="i">
       <shopping-item
-        :data="item"
+        :item="item"
         :index="i"
         @delete="deleteItem"
         @toggle-completed="toggleCompleted"
