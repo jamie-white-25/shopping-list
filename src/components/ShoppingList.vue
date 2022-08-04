@@ -15,17 +15,17 @@ const item = {
 
 const ctx = defineEmits(["delete", "toggleCompleted"]);
 
-const deleteItem = (index: number) => {
-  ctx("delete", index);
+const deleteItem = (uuid: string) => {
+  ctx("delete", uuid);
 };
 
-const toggleCompleted = (index: number, completed: boolean) => {
-  ctx("toggleCompleted", index, completed);
+const toggleCompleted = (uuid: string) => {
+  ctx("toggleCompleted", uuid);
 };
 </script>
 
 <template>
-  <ul class="mb-8 space-y-2">
+  <ul class="mb-8 space-y-2 transition-all duration-300 ease-in-out">
     <template v-for="(item, i) in items" :key="i">
       <shopping-item
         :item="item"

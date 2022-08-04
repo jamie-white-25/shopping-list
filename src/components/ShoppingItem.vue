@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+const ctx = defineEmits(["toggleCompleted", "delete"]);
+
 interface itemInterface {
+  uuid: string;
   name: string;
   value: number;
   amount: number;
@@ -9,20 +12,24 @@ interface itemInterface {
 }
 
 const props = defineProps<{
-  index: number;
   item: itemInterface | any;
 }>();
 
 const item = computed(() => props.item);
-const index = computed(() => props.index);
+
+const toggleCompleted = () => {
+  ctx("toggleCompleted", props.item.uuid, !props.item.completed);
+};
+
+const deleteitem = () => {
+  ctx("delete", props.item.uuid);
+};
 </script>
 
 <template>
-  <li
-    class="flex space-x-3"
-    @click="$emit('toggleCompleted', index, !item.completed)"
-  >
+  <li class="flex space-x-3">
     <div
+      @click="toggleCompleted"
       class="px-4 py-2 w-full rounded border border-gray-200 text-sm transition-all duration-300 ease-in-out flex justify-between items-center"
       :class="
         item.completed
@@ -38,7 +45,7 @@ const index = computed(() => props.index);
     </div>
 
     <button
-      @click="$emit('delete', index)"
+      @click="deleteitem"
       class="py-1 px-2 bg-red-600 rounded flex hover:bg-red-700"
     >
       <svg

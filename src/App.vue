@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { v4 as uuidv4 } from "uuid";
 import ShoppingList from "./components/ShoppingList.vue";
 
 const total = computed(() => {
@@ -20,8 +21,15 @@ const completedTotal = computed(() => {
   return sum;
 });
 
+const makeUuid = () => {
+  let uuid = uuidv4();
+  console.log(uuid);
+  return uuid;
+};
+
 const additem = () => {
   if (validate()) {
+    item.value.uuid = makeUuid();
     list.value.push({ ...item.value });
     item.value.name = "";
     item.value.amount = 0;
@@ -33,14 +41,19 @@ const deleteAll = () => {
   list.value = [];
 };
 
-const deleteItem = (index: number) => {
-  list.value = list.value.filter((item, i) => {
-    return i !== index ? true : false;
+const deleteItem = (uuid: string) => {
+  list.value = list.value.filter((item) => {
+    return item.uuid !== uuid;
   });
 };
 
-const toggleCompleted = (index: number, completed: boolean) => {
-  list.value[index].completed = completed;
+const toggleCompleted = (uuid: string) => {
+  console.log(uuid);
+  list.value.forEach((item) => {
+    if (item.uuid === uuid) {
+      item.completed = !item.completed;
+    }
+  });
 };
 
 const validate = () => {
@@ -60,6 +73,7 @@ const validate = () => {
 };
 
 const item = ref({
+  uuid: "",
   name: "",
   value: 0,
   amount: 1,
@@ -67,8 +81,8 @@ const item = ref({
 });
 
 const list = ref([
-  { name: "test", value: 20, amount: 1, completed: false },
-  { name: "nrew", value: 30, amount: 3, completed: false },
+  { uuid: makeUuid(), name: "test", value: 20, amount: 1, completed: false },
+  { uuid: makeUuid(), name: "nrew", value: 30, amount: 3, completed: false },
 ]);
 </script>
 
