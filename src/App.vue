@@ -102,7 +102,9 @@ const setStorage = () => {
 </script>
 
 <template>
-  <main class="py-8 bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC]">
+  <main
+    class="py-8 min-h-screen min-w-screen bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC]"
+  >
     <div class="relative z-10 bg-none max-w-2xl mx-auto">
       <div
         class="bg-indigo-300 bg-opacity-25 px-6 pt-8 pb-5 rounded-md border border-indigo-200 m-2"
@@ -116,7 +118,6 @@ const setStorage = () => {
             Delete all
           </button>
         </div>
-
         <ShoppingList
           :items="list"
           @delete="deleteItem"
