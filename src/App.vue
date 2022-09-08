@@ -103,7 +103,7 @@ const setStorage = () => {
 
 <template>
   <main
-    class="py-8 min-h-screen min-w-screen bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC]"
+    class="py-8 min-h-screen min-w-screen bg-gradient-to-r from-indigo-300 to-purple-400"
   >
     <div class="relative z-10 bg-none max-w-2xl mx-auto">
       <div
